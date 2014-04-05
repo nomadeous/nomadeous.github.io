@@ -1,7 +1,7 @@
 var Configuration = {
 
   // -- API endpoint
-  apiEndpoint: 'https://lesbonneschoses.prismic.io/api',
+  apiEndpoint: 'https://rgtest1.prismic.io/api',
 
   // -- Access token if the Master is not open
   // accessToken: 'xxxxxx',

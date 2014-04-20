@@ -77,6 +77,7 @@ Sequence.js and its dependencies are (c) Ian Lunn Design 2012 - 2013 unless othe
 }
 /** !Styling **/
 
+/* CONTROLS */
 #sequence .controls {
   height: 49px;
   margin: -25px auto 0;
@@ -112,7 +113,9 @@ Sequence.js and its dependencies are (c) Ian Lunn Design 2012 - 2013 unless othe
 #sequence .sequence-pause:hover {
   opacity:1;
 }
+/* !CONTROLS */
 
+/* SLIDES POSITIONS */
 #sequence #slide1 {
     left: 0%;
     top: 300px;
@@ -144,6 +147,7 @@ Sequence.js and its dependencies are (c) Ian Lunn Design 2012 - 2013 unless othe
 #sequence #slide3 h2 {
     top: 100px;
 }
+/* !SLIDES POSITIONS */
 
 /** ANIMATIONS **/
 #sequence .sequence-canvas .in-from-left {
@@ -298,6 +302,12 @@ Sequence.js and its dependencies are (c) Ian Lunn Design 2012 - 2013 unless othe
 /** !ANIMATIONS **/
 
 /** Responsiveness **/
+@media (max-width: 1169px){
+	#sequence .controls {
+		display:none;
+	}
+}
+
 @media (max-width: 991px){
     #sequence,
     #sequence-theme{
@@ -312,107 +322,49 @@ Sequence.js and its dependencies are (c) Ian Lunn Design 2012 - 2013 unless othe
         height:400px;
     }
     
-    #sequence .slide1-img,
-    #sequence .slide2-img,
     #sequence .message-slide1,
     #sequence .message-slide2,
     #sequence .message-slide3 {
       top:80px;
       bottom: auto;
     }
-    
-    #sequence .slide3-img2 {
-      bottom:50px;
-    }
-    #sequence .slide3-img3 {
-      right:1%;
-      bottom:50px;
-    }
-    
-    #sequence .slide3-img1 {
-      bottom:50px;
-    }
 }
 
+@media (max-width: 767px){
+    #sequence h2 {font-size: 32px;}
+    #sequence .slide p {font-size: 24px;line-height:24px;}
+}
 @media (max-width: 479px){
     #sequence,
-    #sequence-theme{
-        height:300px;
+    #sequence-theme {height:300px;}
+    #sequence h2 {font-size: 32px;line-height:30px;}
+    #sequence .slide p {font-size: 18px;line-height:18px;}
+    #sequence #slide2 * , #sequence #slide3 * {
+        left:0px;right:0px;
     }
     
-    #sequence p {
-        line-height:18px;
+    #sequence #slide1, #sequence #slide2, #sequence #slide3 {
+        right: 0%;
+        left: 0%;
+        top: 0px;
+        width: 100%;
     }
+    #sequence #slide1 h2, #sequence #slide2 h2, #sequence #slide3 h2 {
+        top : 100px;
+        text-align: center;
+        width:100%;
+    }
+    #sequence #slide1 p, #sequence #slide2 p, #sequence #slide3 p {
+        text-align: center;
+        width:80%;
+        left:10%;
+        top : 180px;
+    }
+    #sequence .slide p {text-align: center;}
+    
 }
-
-@media (max-width: 1169px){
-	
-	#sequence .controls {
-		display:none;
-	}
-
+@media (max-width: 319px){
+    #sequence h2 {font-size: 26px;}
+    #sequence .slide p {font-size: 14px;}
 }
 /* !Responsiveness */
-
-/*
-
-.sequence-preloader{height: 100%;position: absolute;width: 100%;z-index: 999999;}@-webkit-keyframes preload{0%{opacity: 1;}50%{opacity: 0;}100%{opacity: 1;}}.sequence-preloader .preloading .circle{fill: #ff9442;display: inline-block;height: 12px;position: relative;top: -50%;width: 12px;-webkit-animation: preload 1s infinite; animation: preload 1s infinite;}.preloading{display:block;height: 12px;margin: 0 auto;top: 50%;margin-top:-6px;position: relative;width: 48px;}.sequence-preloader .preloading .circle:nth-child(2){-webkit-animation-delay: .15s; animation-delay: .15s;}.sequence-preloader .preloading .circle:nth-child(3){-webkit-animation-delay: .3s; animation-delay: .3s;}.preloading-complete{opacity: 0;visibility: hidden;-webkit-transition-duration: 1s; transition-duration: 1s;}div.inline{background-color: #ff9442; margin-right: 4px; float: left;}
-
-#sequence .sequence-preloader {
-  height: 100%;
-  position: absolute;
-  width: 100%;
-  z-index: 999999;
-}
-#sequence .sequence-preloader img {
-  background: #ff9933;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -o-border-radius: 6px;
-  border-radius: 6px;
-  display: inline-block;
-  height: 12px;
-  opacity: 0;
-  position: relative;
-  top: -50%;
-  width: 12px;
-  -webkit-animation: preload 1s infinite;
-  -moz-animation: preload 1s infinite;
-  -ms-animation: preload 1s infinite;
-  -o-animation: preload 1s infinite;
-  animation: preload 1s infinite;
-}
-#sequence .sequence-preloader .preloading {
-  height: 12px;
-  margin: 0 auto;
-  top: 50%;
-  position: relative;
-  width: 48px;
-}
-#sequence .sequence-preloader img:nth-child(2) {
-  -webkit-animation-delay: 0.15s;
-  -moz-animation-delay: 0.15s;
-  -ms-animation-delay: 0.15s;
-  -o-animation-delay: 0.15s;
-  animation-delay: 0.15s;
-}
-#sequence .sequence-preloader img:nth-child(3) {
-  -webkit-animation-delay: 0.3s;
-  -moz-animation-delay: 0.3s;
-  -ms-animation-delay: 0.3s;
-  -o-animation-delay: 0.3s;
-  animation-delay: 0.3s;
-}
-#sequence .sequence-preloader .preloading-complete {
-  opacity: 0;
-  visibility: hidden;
-  -webkit-transition-duration: 1s;
-  -moz-transition-duration: 1s;
-  -ms-transition-duration: 1s;
-  -o-transition-duration: 1s;
-  transition-duration: 1s;
-}*/
-
-
-

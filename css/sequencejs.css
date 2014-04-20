@@ -313,6 +313,9 @@ Sequence.js and its dependencies are (c) Ian Lunn Design 2012 - 2013 unless othe
     #sequence-theme{
         height:530px;
     }
+    #sequence #slide1 h2 {
+        top : -150px;
+    }
 }
 
 @media (max-width: 767px){

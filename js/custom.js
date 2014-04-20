@@ -69,19 +69,55 @@ $(document).ready(function() {
         formatSelection: format,
         formatResult: format
     });
+    $('#types-selection').on("change", function(e) { updatePrices();});
+    $('#brands-selection').on("change", function(e) { updatePrices();});
+    
+    function updatePrices() {
+        var type = $('#types-selection').val();
+        var brandName = $('#brands-selection').val()
+        if(type != "" && brandName != "") {
+            var brand = findBrand(brandName);
+            prices = tarifsRef[brand.gamme][type];
+            //$('#howmany-min').html(prices.min + ' &euro;');
+            //$('#howmany-max').html(prices.max + ' &euro;');
+            scrollNumber(0, prices.min, $('#howmany-min'), function() {
+                scrollNumber(0, prices.min, $('#howmany-min'));
+            });
+            scrollNumber(0, 0, $('#howmany-max'), function() {
+                scrollNumber(0, prices.max, $('#howmany-max'));
+            });
+        }
+    }
+    
+    function scrollNumber(a, b, c, d) {
+        var aInt = parseInt(a);
+        var bInt = parseInt(b);
+        var e = Math.floor(Math.min(Math.abs(bInt - aInt), 10)), f = Math.floor((bInt - aInt) / e, 10), g = 0, h = aInt, i = setInterval(function() {
+        if (g === e) {
+            c.html(toDollarsAndCents(b + "&euro;")), clearInterval(i), d && d();
+            return;
+        }
+        h += f, c.html(toDollarsAndCents(Math.abs(h))+ "&euro;"), g++;
+        }, 25);
+    }
+    
+    function toDollarsAndCents(value){
+        return value;//(value / 100).toFixed(2);
+    }
     
     function loadBrandsTables() {
-        var divTables = $('#brands-list');
         var brands = brandsRef.brands;
         var nbByLines = 3;
         var nbInLine = 0;
         var previousLetter = "";
         var previousTable = false;
-        var html = "";
+        var html = '<dl class="dl-horizontal">';
+        var htmlIndex = "";
         var letters = new Array();
         
         for(i=0;i<brands.length;i++) {
             var brand = brands[i].id;
+            /*
             if(previousLetter != brand.substring(0,1)) {
                 if(previousTable) {
                     html+= '</tbody></table>';
@@ -98,17 +134,30 @@ $(document).ready(function() {
             if(nbInLine == 1) {
                 html+= '<tr>';
             }
-            html+= '<td>'+brand+'</td>';
+            html+= '<td class="brand">'+brand+'</td>';
             
             if(nbInLine >= nbByLines) {
                 html+= '</tr>';
                 nbInLine = 0;
+            }*/
+            if(previousLetter != brand.substring(0,1)) {
+                if(previousTable) {
+                    html+= '</ul></dd>';
+                }
+                previousTable = true;
+                var newLetter= brand.substring(0,1);
+                html+= '<dt id="brands-letter-'+newLetter+'">'+newLetter+'<a href="#brands" class="scrollto"><i class="fa fa-arrow-up"></i></a></dt><dd><ul>';
+                previousLetter = newLetter;
+                letters+= newLetter;
             }
+            html+= '<li class="brand">'+brand+'</li>';
         }
         for(var j=letters.length-1;j>=0;j--) {
-            html = '<a href="#brands-letter-'+letters[j]+'" class="scrollto">' + letters[j] + '</a> ' + html;
+            htmlIndex = '<a href="#brands-letter-'+letters[j]+'" class="scrollto">' + letters[j] + '</a> ' + htmlIndex;
         }
-        divTables.html(divTables.html() + html );
+        html = "</dl>" + html;
+        $('#brands-list').html(html );
+        $('#brands-list-index').html(htmlIndex);
     }
     loadBrandsTables();
     
@@ -125,6 +174,13 @@ $(document).ready(function() {
     });
 });
 
+function findBrand(id) {
+    for(var i=0;i<brandsRef.brands.length;i++) {
+        if(brandsRef.brands[i].id == id) {
+            return brandsRef.brands[i];
+        }
+    }
+}
 
 /* BRANDS */
 
@@ -142,196 +198,244 @@ var typesRef = { types : [
 
 
 var brandsRef = { brands : [
-{"id" : "3.1 PHILLIP LIM","gamme":"Tendance"},
-{"id" : "7 FOR ALL MANKIND","gamme":"Tendance"},
-{"id" : "ACNE","gamme":"Haut de gamme"},
-{"id" : "AGNÈS B.","gamme":"Tendance"},
-{"id" : "AMERICAN RETRO","gamme":"Tendance"},
-{"id" : "AMERICAN VINTAGE","gamme":"Tendance"},
-{"id" : "ANN DEMEULEMEESTER","gamme":"Haut de gamme"},
-{"id" : "ANTIK BATIK","gamme":"Tendance"},
-{"id" : "APC","gamme":"Tendance"},
-{"id" : "APOSTROPHE","gamme":"Tendance"},
-{"id" : "APRIL MAY","gamme":"Tendance"},
-{"id" : "Abercrombie & Fitch","gamme":"Grand public"},
-{"id" : "BALENCIAGA","gamme":"Haut de gamme"},
-{"id" : "BALMAIN","gamme":"Haut de gamme"},
-{"id" : "BANANA REPUBLIC","gamme":"Grand public"},
-{"id" : "BARBARA BUI","gamme":"Haut de gamme"},
-{"id" : "BASH","gamme":"Tendance"},
-{"id" : "BCBG MAX AZRIA","gamme":"Tendance"},
-{"id" : "BEL AIR","gamme":"Tendance"},
-{"id" : "BELLEROSE","gamme":"Tendance"},
-{"id" : "BELSTAFF","gamme":"Tendance"},
-{"id" : "BIMBA & LOLA","gamme":"Tendance"},
-{"id" : "BOUCHRA JARRAR","gamme":"Haut de gamme"},
-{"id" : "BRUNELLO CUCINELLI","gamme":"Tendance"},
-{"id" : "BRUUNS BAZAAR","gamme":"Tendance"},
-{"id" : "BURBERRY BRIT","gamme":"Tendance"},
-{"id" : "BURBERRY LONDON","gamme":"Haut de gamme"},
-{"id" : "BURBERRY PRORSUM","gamme":"Haut de gamme"},
-{"id" : "BY MALENE BIRGER","gamme":"Tendance"},
-{"id" : "BY ZOE","gamme":"Tendance"},
-{"id" : "CACHAREL","gamme":"Tendance"},
-{"id" : "CALLA","gamme":"Tendance"},
-{"id" : "CANADA GOOSE","gamme":"Tendance"},
-{"id" : "CARVEN","gamme":"Haut de gamme"},
-{"id" : "CATHERINE MALANDRINO","gamme":"Tendance"},
-{"id" : "CELINE","gamme":"Haut de gamme"},
-{"id" : "CHANEL","gamme":"Haut de gamme"},
-{"id" : "CHEAP MONDAY","gamme":"Grand public"},
-{"id" : "CHLOÉ","gamme":"Haut de gamme"},
-{"id" : "CHRISTINE PHUNG","gamme":"Haut de gamme"},
-{"id" : "CHRISTIAN DIOR","gamme":"Haut de gamme"},
-{"id" : "CHRISTIAN LACROIX","gamme":"Haut de gamme"},
-{"id" : "CHRISTOPHE LEMAIRE","gamme":"Haut de gamme"},
-{"id" : "CIRCUS & CO","gamme":"Grand public"},
-{"id" : "CLAUDIE PIERLOT","gamme":"Tendance"},
-{"id" : "CLUB MONACO","gamme":"Grand public"},
-{"id" : "COMME DES GARCONS","gamme":"Haut de gamme"},
-{"id" : "COMPTOIR DES COTONNIERS","gamme":"Grand public"},
-{"id" : "COP COPINE","gamme":"Grand public"},
-{"id" : "COS","gamme":"Grand public"},
-{"id" : "COTÉLAC","gamme":"Tendance"},
-{"id" : "COURREGES","gamme":"Haut de gamme"},
-{"id" : "CULTURE VINTAGE","gamme":"Grand public"},
-{"id" : "D&G","gamme":"Tendance"},
-{"id" : "DES PETITS HAUTS","gamme":"Grand public"},
-{"id" : "DIANE VON FURSTENBERG","gamme":"Tendance"},
-{"id" : "DIESEL","gamme":"Grand public"},
-{"id" : "DIOR","gamme":"Haut de gamme"},
-{"id" : "DKNY","gamme":"Grand public"},
-{"id" : "DOLCE & GABBANA","gamme":"Haut de gamme"},
-{"id" : "DONNA KARAN","gamme":"Tendance"},
-{"id" : "DRIES VAN NOTEN","gamme":"Haut de gamme"},
-{"id" : "EKYOG  - hors pièces basiques","gamme":"Grand public"},
-{"id" : "EQUIPMENT","gamme":"Tendance"},
-{"id" : "ERIC BOMPARD","gamme":"Tendance"},
-{"id" : "EROTOKRITOS","gamme":"Tendance"},
-{"id" : "ESCADA","gamme":"Haut de gamme"},
-{"id" : "ET VOUS","gamme":"Grand public"},
-{"id" : "ETRO","gamme":"Haut de gamme"},
-{"id" : "FRENCH CONNECTION","gamme":"Grand public"},
-{"id" : "GAT RIMON","gamme":"Tendance"},
-{"id" : "GERARD DAREL","gamme":"Tendance"},
-{"id" : "GIANNI VERSACE","gamme":"Haut de gamme"},
-{"id" : "GIVENCHY","gamme":"Haut de gamme"},
-{"id" : "GUCCI","gamme":"Haut de gamme"},
-{"id" : "HARTFORD","gamme":"Tendance"},
-{"id" : "HEIMSTONE","gamme":"Tendance"},
-{"id" : "HERMÈS","gamme":"Haut de gamme"},
-{"id" : "HERVE LEGER","gamme":"Haut de gamme"},
-{"id" : "HOGAN","gamme":"Haut de gamme"},
-{"id" : "HUGO BOSS","gamme":"Tendance"},
-{"id" : "IKKS","gamme":"Tendance"},
-{"id" : "IRENE VAN RYB","gamme":"Tendance"},
-{"id" : "IRIÉ","gamme":"Tendance"},
-{"id" : "IRO","gamme":"Tendance"},
-{"id" : "ISABEL MARANT","gamme":"Haut de gamme"},
-{"id" : "ISABEL MARANT ETOILE","gamme":"Tendance"},
-{"id" : "ISSEY MIYAKE","gamme":"Haut de gamme"},
-{"id" : "JAY AHR","gamme":"Haut de gamme"},
-{"id" : "JEAN PAUL GAULTIER","gamme":"Haut de gamme"},
-{"id" : "JIL SANDER","gamme":"Haut de gamme"},
-{"id" : "JOHN GALLIANO","gamme":"Haut de gamme"},
-{"id" : "JOOP!","gamme":"Tendance"},
-{"id" : "JOSEPH","gamme":"Tendance"},
-{"id" : "JUNYA WATANABE","gamme":"Haut de gamme"},
-{"id" : "JUST CAVALLI","gamme":"Haut de gamme"},
-{"id" : "KAREN MILLEN","gamme":"Tendance"},
-{"id" : "KARL LAGERFELD","gamme":"Haut de gamme"},
-{"id" : "KENNETH COLE","gamme":"Tendance"},
-{"id" : "KENZO","gamme":"Haut de gamme"},
-{"id" : "KITSUNE","gamme":"Tendance"},
-{"id" : "LACOSTE","gamme":"Grand public"},
-{"id" : "LANVIN","gamme":"Haut de gamme"},
-{"id" : "LAURENCE DOLIGE","gamme":"Tendance"},
-{"id" : "LE MONT SAINT MICHEL","gamme":"Tendance"},
-{"id" : "LE PETIT LUCAS DU TERTRE","gamme":"Tendance"},
-{"id" : "LEONARD","gamme":"Haut de gamme"},
-{"id" : "LES PETITES","gamme":"Tendance"},
-{"id" : "LOLA","gamme":"Tendance"},
-{"id" : "LOUIS VUITTON","gamme":"Haut de gamme"},
-{"id" : "MADAME A PARIS","gamme":"Tendance"},
-{"id" : "MADELEINE THOMPSON","gamme":"Tendance"},
-{"id" : "MADEMOISELLE TARA","gamme":"Grand public"},
-{"id" : "MAISON MARTIN MARGIELA","gamme":"Haut de gamme"},
-{"id" : "MAISON OLGA","gamme":"Tendance"},
-{"id" : "MAJE","gamme":"Tendance"},
-{"id" : "MANOUSH","gamme":"Tendance"},
-{"id" : "MARC BY MARC JACOBS","gamme":"Tendance"},
-{"id" : "MARC JACOBS","gamme":"Haut de gamme"},
-{"id" : "MARNI","gamme":"Haut de gamme"},
-{"id" : "MAX MARA","gamme":"Haut de gamme"},
-{"id" : "MCQ","gamme":"Haut de gamme"},
-{"id" : "MISSONI","gamme":"Haut de gamme"},
-{"id" : "MIU MIU","gamme":"Haut de gamme"},
-{"id" : "MONCLER","gamme":"Haut de gamme"},
-{"id" : "NINA RICCI","gamme":"Haut de gamme"},
-{"id" : "OLYMPIA LE TAN","gamme":"Haut de gamme"},
-{"id" : "PABLO DE GERARD DAREL","gamme":"Tendance"},
-{"id" : "PARAJUMPERS","gamme":"Tendance"},
-{"id" : "PATRIZIA PEPE","gamme":"Tendance"},
-{"id" : "PAUL & JOE","gamme":"Tendance"},
-{"id" : "PAUL & JOE SISTER","gamme":"Grand public"},
-{"id" : "PAUL SMITH","gamme":"Haut de gamme"},
-{"id" : "PAUL SMITH BLACK","gamme":"Haut de gamme"},
-{"id" : "PAULE KA","gamme":"Tendance"},
-{"id" : "PRADA","gamme":"Haut de gamme"},
-{"id" : "PROENZA SCHOULER","gamme":"Haut de gamme"},
-{"id" : "PYRENEX","gamme":"Tendance"},
-{"id" : "RAF SIMONS","gamme":"Haut de gamme"},
-{"id" : "RAG & BONE","gamme":"Tendance"},
-{"id" : "RALPH LAUREN","gamme":"Tendance"},
-{"id" : "RALPH LAUREN BLACK LABEL","gamme":"Tendance"},
-{"id" : "RALPH LAUREN BLUE LABEL","gamme":"Tendance"},
-{"id" : "RALPH LAUREN COLLECTION","gamme":"Tendance"},
-{"id" : "RALPH LAUREN DENIM & SUPPLY","gamme":"Tendance"},
-{"id" : "RALPH LAUREN DOUBLE RL","gamme":"Tendance"},
-{"id" : "RALPH LAUREN SPORT","gamme":"Tendance"},
-{"id" : "RED VALENTINO","gamme":"Haut de gamme"},
-{"id" : "REISS","gamme":"Tendance"},
-{"id" : "REPETTO","gamme":"Tendance"},
-{"id" : "RICK OWENS","gamme":"Haut de gamme"},
-{"id" : "ROBERTO CAVALLI","gamme":"Haut de gamme"},
-{"id" : "RODIER","gamme":"Tendance"},
-{"id" : "ROSEANNA","gamme":"Tendance"},
-{"id" : "SAINT JAMES","gamme":"Grand public"},
-{"id" : "SAINT LAURENT","gamme":"Haut de gamme"},
-{"id" : "SANDRO","gamme":"Tendance"},
-{"id" : "SCARLETT ROOS","gamme":"Grand public"},
-{"id" : "SEE BY CHLOÉ","gamme":"Tendance"},
-{"id" : "SESSUN","gamme":"Grand public"},
-{"id" : "SONIA BY SONIA RYKIEL","gamme":"Tendance"},
-{"id" : "SONIA RYKIEL","gamme":"Haut de gamme"},
-{"id" : "SOPHIA KOKOSALAKI","gamme":"Haut de gamme"},
-{"id" : "STELLA CADENTE","gamme":"Tendance"},
-{"id" : "STELLA FOREST","gamme":"Tendance"},
-{"id" : "STELLA MC CARTNEY","gamme":"Haut de gamme"},
-{"id" : "SWILDENS","gamme":"Tendance"},
-{"id" : "TARA JARMON","gamme":"Tendance"},
-{"id" : "THE KOOPLES","gamme":"Tendance"},
-{"id" : "THE KOOPLES SPORT","gamme":"Tendance"},
-{"id" : "THOMSEN","gamme":"Tendance"},
-{"id" : "TOM FORD","gamme":"Haut de gamme"},
-{"id" : "TSUMORI CHISATO","gamme":"Haut de gamme"},
-{"id" : "VALENTINO","gamme":"Haut de gamme"},
-{"id" : "VANESSA BRUNO","gamme":"Haut de gamme"},
-{"id" : "VANESSA BRUNO ATHE","gamme":"Tendance"},
-{"id" : "VENTCOUVERT","gamme":"Tendance"},
-{"id" : "VERA WANG","gamme":"Haut de gamme"},
-{"id" : "VERONIQUE LEROY","gamme":"Tendance"},
-{"id" : "VERSACE","gamme":"Haut de gamme"},
-{"id" : "VINCE","gamme":"Tendance"},
-{"id" : "VIONNET","gamme":"Haut de gamme"},
-{"id" : "VIRGINIE CASTAWAY","gamme":"Tendance"},
-{"id" : "VIVIENNE WESTWOOD","gamme":"Haut de gamme"},
-{"id" : "VIVIENNE WESTWOOD RED LABEL","gamme":"Haut de gamme"},
-{"id" : "Y-3","gamme":"Haut de gamme"},
-{"id" : "YIGAL AZROUEL","gamme":"Haut de gamme"},
-{"id" : "YOHJI YAMAMOTO","gamme":"Haut de gamme"},
-{"id" : "YVES SAINT LAURENT","gamme":"Haut de gamme"},
-{"id" : "ZADIG & VOLTAIRE","gamme":"Tendance"},
-{"id" : "ZARA  - hors ZARA basic","gamme":"Grand public"}]};
+{"id" : "3.1 PHILLIP LIM","gamme":"T"},
+{"id" : "7 FOR ALL MANKIND","gamme":"T"},
+{"id" : "ACNE","gamme":"HG"},
+{"id" : "AGNÈS B.","gamme":"T"},
+{"id" : "AMERICAN RETRO","gamme":"T"},
+{"id" : "AMERICAN VINTAGE","gamme":"T"},
+{"id" : "ANN DEMEULEMEESTER","gamme":"HG"},
+{"id" : "ANTIK BATIK","gamme":"T"},
+{"id" : "APC","gamme":"T"},
+{"id" : "APOSTROPHE","gamme":"T"},
+{"id" : "APRIL MAY","gamme":"T"},
+{"id" : "Abercrombie & Fitch","gamme":"GP"},
+{"id" : "BALENCIAGA","gamme":"HG"},
+{"id" : "BALMAIN","gamme":"HG"},
+{"id" : "BANANA REPUBLIC","gamme":"GP"},
+{"id" : "BARBARA BUI","gamme":"HG"},
+{"id" : "BASH","gamme":"T"},
+{"id" : "BCBG MAX AZRIA","gamme":"T"},
+{"id" : "BEL AIR","gamme":"T"},
+{"id" : "BELLEROSE","gamme":"T"},
+{"id" : "BELSTAFF","gamme":"T"},
+{"id" : "BIMBA & LOLA","gamme":"T"},
+{"id" : "BOUCHRA JARRAR","gamme":"HG"},
+{"id" : "BRUNELLO CUCINELLI","gamme":"T"},
+{"id" : "BRUUNS BAZAAR","gamme":"T"},
+{"id" : "BURBERRY BRIT","gamme":"T"},
+{"id" : "BURBERRY LONDON","gamme":"HG"},
+{"id" : "BURBERRY PRORSUM","gamme":"HG"},
+{"id" : "BY MALENE BIRGER","gamme":"T"},
+{"id" : "BY ZOE","gamme":"T"},
+{"id" : "CACHAREL","gamme":"T"},
+{"id" : "CALLA","gamme":"T"},
+{"id" : "CANADA GOOSE","gamme":"T"},
+{"id" : "CARVEN","gamme":"HG"},
+{"id" : "CATHERINE MALANDRINO","gamme":"T"},
+{"id" : "CELINE","gamme":"HG"},
+{"id" : "CHANEL","gamme":"HG"},
+{"id" : "CHEAP MONDAY","gamme":"GP"},
+{"id" : "CHLOÉ","gamme":"HG"},
+{"id" : "CHRISTINE PHUNG","gamme":"HG"},
+{"id" : "CHRISTIAN DIOR","gamme":"HG"},
+{"id" : "CHRISTIAN LACROIX","gamme":"HG"},
+{"id" : "CHRISTOPHE LEMAIRE","gamme":"HG"},
+{"id" : "CIRCUS & CO","gamme":"GP"},
+{"id" : "CLAUDIE PIERLOT","gamme":"T"},
+{"id" : "CLUB MONACO","gamme":"GP"},
+{"id" : "COMME DES GARCONS","gamme":"HG"},
+{"id" : "COMPTOIR DES COTONNIERS","gamme":"GP"},
+{"id" : "COP COPINE","gamme":"GP"},
+{"id" : "COS","gamme":"GP"},
+{"id" : "COTÉLAC","gamme":"T"},
+{"id" : "COURREGES","gamme":"HG"},
+{"id" : "CULTURE VINTAGE","gamme":"GP"},
+{"id" : "D&G","gamme":"T"},
+{"id" : "DES PETITS HAUTS","gamme":"GP"},
+{"id" : "DIANE VON FURSTENBERG","gamme":"T"},
+{"id" : "DIESEL","gamme":"GP"},
+{"id" : "DIOR","gamme":"HG"},
+{"id" : "DKNY","gamme":"GP"},
+{"id" : "DOLCE & GABBANA","gamme":"HG"},
+{"id" : "DONNA KARAN","gamme":"T"},
+{"id" : "DRIES VAN NOTEN","gamme":"HG"},
+{"id" : "EKYOG  - hors pièces basiques","gamme":"GP"},
+{"id" : "EQUIPMENT","gamme":"T"},
+{"id" : "ERIC BOMPARD","gamme":"T"},
+{"id" : "EROTOKRITOS","gamme":"T"},
+{"id" : "ESCADA","gamme":"HG"},
+{"id" : "ET VOUS","gamme":"GP"},
+{"id" : "ETRO","gamme":"HG"},
+{"id" : "FRENCH CONNECTION","gamme":"GP"},
+{"id" : "GAT RIMON","gamme":"T"},
+{"id" : "GERARD DAREL","gamme":"T"},
+{"id" : "GIANNI VERSACE","gamme":"HG"},
+{"id" : "GIVENCHY","gamme":"HG"},
+{"id" : "GUCCI","gamme":"HG"},
+{"id" : "HARTFORD","gamme":"T"},
+{"id" : "HEIMSTONE","gamme":"T"},
+{"id" : "HERMÈS","gamme":"HG"},
+{"id" : "HERVE LEGER","gamme":"HG"},
+{"id" : "HOGAN","gamme":"HG"},
+{"id" : "HUGO BOSS","gamme":"T"},
+{"id" : "IKKS","gamme":"T"},
+{"id" : "IRENE VAN RYB","gamme":"T"},
+{"id" : "IRIÉ","gamme":"T"},
+{"id" : "IRO","gamme":"T"},
+{"id" : "ISABEL MARANT","gamme":"HG"},
+{"id" : "ISABEL MARANT ETOILE","gamme":"T"},
+{"id" : "ISSEY MIYAKE","gamme":"HG"},
+{"id" : "JAY AHR","gamme":"HG"},
+{"id" : "JEAN PAUL GAULTIER","gamme":"HG"},
+{"id" : "JIL SANDER","gamme":"HG"},
+{"id" : "JOHN GALLIANO","gamme":"HG"},
+{"id" : "JOOP!","gamme":"T"},
+{"id" : "JOSEPH","gamme":"T"},
+{"id" : "JUNYA WATANABE","gamme":"HG"},
+{"id" : "JUST CAVALLI","gamme":"HG"},
+{"id" : "KAREN MILLEN","gamme":"T"},
+{"id" : "KARL LAGERFELD","gamme":"HG"},
+{"id" : "KENNETH COLE","gamme":"T"},
+{"id" : "KENZO","gamme":"HG"},
+{"id" : "KITSUNE","gamme":"T"},
+{"id" : "LACOSTE","gamme":"GP"},
+{"id" : "LANVIN","gamme":"HG"},
+{"id" : "LAURENCE DOLIGE","gamme":"T"},
+{"id" : "LE MONT SAINT MICHEL","gamme":"T"},
+{"id" : "LE PETIT LUCAS DU TERTRE","gamme":"T"},
+{"id" : "LEONARD","gamme":"HG"},
+{"id" : "LES PETITES","gamme":"T"},
+{"id" : "LOLA","gamme":"T"},
+{"id" : "LOUIS VUITTON","gamme":"HG"},
+{"id" : "MADAME A PARIS","gamme":"T"},
+{"id" : "MADELEINE THOMPSON","gamme":"T"},
+{"id" : "MADEMOISELLE TARA","gamme":"GP"},
+{"id" : "MAISON MARTIN MARGIELA","gamme":"HG"},
+{"id" : "MAISON OLGA","gamme":"T"},
+{"id" : "MAJE","gamme":"T"},
+{"id" : "MANOUSH","gamme":"T"},
+{"id" : "MARC BY MARC JACOBS","gamme":"T"},
+{"id" : "MARC JACOBS","gamme":"HG"},
+{"id" : "MARNI","gamme":"HG"},
+{"id" : "MAX MARA","gamme":"HG"},
+{"id" : "MCQ","gamme":"HG"},
+{"id" : "MISSONI","gamme":"HG"},
+{"id" : "MIU MIU","gamme":"HG"},
+{"id" : "MONCLER","gamme":"HG"},
+{"id" : "NINA RICCI","gamme":"HG"},
+{"id" : "OLYMPIA LE TAN","gamme":"HG"},
+{"id" : "PABLO DE GERARD DAREL","gamme":"T"},
+{"id" : "PARAJUMPERS","gamme":"T"},
+{"id" : "PATRIZIA PEPE","gamme":"T"},
+{"id" : "PAUL & JOE","gamme":"T"},
+{"id" : "PAUL & JOE SISTER","gamme":"GP"},
+{"id" : "PAUL SMITH","gamme":"HG"},
+{"id" : "PAUL SMITH BLACK","gamme":"HG"},
+{"id" : "PAULE KA","gamme":"T"},
+{"id" : "PRADA","gamme":"HG"},
+{"id" : "PROENZA SCHOULER","gamme":"HG"},
+{"id" : "PYRENEX","gamme":"T"},
+{"id" : "RAF SIMONS","gamme":"HG"},
+{"id" : "RAG & BONE","gamme":"T"},
+{"id" : "RALPH LAUREN","gamme":"T"},
+{"id" : "RALPH LAUREN BLACK LABEL","gamme":"T"},
+{"id" : "RALPH LAUREN BLUE LABEL","gamme":"T"},
+{"id" : "RALPH LAUREN COLLECTION","gamme":"T"},
+{"id" : "RALPH LAUREN DENIM & SUPPLY","gamme":"T"},
+{"id" : "RALPH LAUREN DOUBLE RL","gamme":"T"},
+{"id" : "RALPH LAUREN SPORT","gamme":"T"},
+{"id" : "RED VALENTINO","gamme":"HG"},
+{"id" : "REISS","gamme":"T"},
+{"id" : "REPETTO","gamme":"T"},
+{"id" : "RICK OWENS","gamme":"HG"},
+{"id" : "ROBERTO CAVALLI","gamme":"HG"},
+{"id" : "RODIER","gamme":"T"},
+{"id" : "ROSEANNA","gamme":"T"},
+{"id" : "SAINT JAMES","gamme":"GP"},
+{"id" : "SAINT LAURENT","gamme":"HG"},
+{"id" : "SANDRO","gamme":"T"},
+{"id" : "SCARLETT ROOS","gamme":"GP"},
+{"id" : "SEE BY CHLOÉ","gamme":"T"},
+{"id" : "SESSUN","gamme":"GP"},
+{"id" : "SONIA BY SONIA RYKIEL","gamme":"T"},
+{"id" : "SONIA RYKIEL","gamme":"HG"},
+{"id" : "SOPHIA KOKOSALAKI","gamme":"HG"},
+{"id" : "STELLA CADENTE","gamme":"T"},
+{"id" : "STELLA FOREST","gamme":"T"},
+{"id" : "STELLA MC CARTNEY","gamme":"HG"},
+{"id" : "SWILDENS","gamme":"T"},
+{"id" : "TARA JARMON","gamme":"T"},
+{"id" : "THE KOOPLES","gamme":"T"},
+{"id" : "THE KOOPLES SPORT","gamme":"T"},
+{"id" : "THOMSEN","gamme":"T"},
+{"id" : "TOM FORD","gamme":"HG"},
+{"id" : "TSUMORI CHISATO","gamme":"HG"},
+{"id" : "VALENTINO","gamme":"HG"},
+{"id" : "VANESSA BRUNO","gamme":"HG"},
+{"id" : "VANESSA BRUNO ATHE","gamme":"T"},
+{"id" : "VENTCOUVERT","gamme":"T"},
+{"id" : "VERA WANG","gamme":"HG"},
+{"id" : "VERONIQUE LEROY","gamme":"T"},
+{"id" : "VERSACE","gamme":"HG"},
+{"id" : "VINCE","gamme":"T"},
+{"id" : "VIONNET","gamme":"HG"},
+{"id" : "VIRGINIE CASTAWAY","gamme":"T"},
+{"id" : "VIVIENNE WESTWOOD","gamme":"HG"},
+{"id" : "VIVIENNE WESTWOOD RED LABEL","gamme":"HG"},
+{"id" : "Y-3","gamme":"HG"},
+{"id" : "YIGAL AZROUEL","gamme":"HG"},
+{"id" : "YOHJI YAMAMOTO","gamme":"HG"},
+{"id" : "YVES SAINT LAURENT","gamme":"HG"},
+{"id" : "ZADIG & VOLTAIRE","gamme":"T"},
+{"id" : "ZARA  - hors ZARA basic","gamme":"GP"}]};
+
+var tarifsRef = { "GP" :
+    {
+        "top" :{"min" : "5", "max" : "8,75"},
+        "pull":{"min" : "5", "max" : "8,75"},
+        "jupe":{"min" : "5", "max" : "8,75"},
+        "combinaison":{"min" : "6", "max" : "8,75"},
+        "robe":{"min" : "6", "max" : "12,50"},
+        "veste":{"min" : "6", "max" : "10"},
+        "blouson":{"min" : "6", "max" : "10"},
+        "trench":{"min" : "6", "max" : "17,50"},
+        "manteau":{"min" : "6", "max" : "17,50"},
+    }
+    , "T" :
+    {
+        "top":{"min" : "6", "max" : "12,50"},
+        "pull":{"min" : "6", "max" : "12,50"},
+        "jupe":{"min" : "6", "max" : "12,50"},
+        "combinaison":{"min" : "8", "max" : "12,50"},
+        "robe":{"min" : "8", "max" : "17,50"},
+        "veste":{"min" : "8", "max" : "15"},
+        "blouson":{"min" : "8", "max" : "15"},
+        "trench":{"min" : "10", "max" : "50"},
+        "manteau":{"min" : "10", "max" : "75"},
+    }, "HG" :
+    {
+        "top":{"min" : "8", "max" : "25"},
+        "pull":{"min" : "8", "max" : "37,50"},
+        "jupe":{"min" : "8", "max" : "25"},
+        "combinaison":{"min" : "10", "max" : "25"},
+        "robe":{"min" : "10", "max" : "50"},
+        "veste":{"min" : "10", "max" : "50"},
+        "blouson":{"min" : "10", "max" : "50"},
+        "trench":{"min" : "15", "max" : "125"},
+        "manteau":{"min" : "15", "max" : "125"},
+    }, "VHG" :
+    {
+        "top":{"min" : "6", "max" : "20"},
+        "pull":{"min" : "6", "max" : "25"},
+        "jupe":{"min" : "6", "max" : "17,50"},
+        "combinaison":{"min" : "8", "max" : "17,50"},
+        "robe":{"min" : "8", "max" : "25"},
+        "veste":{"min" : "8", "max" : "25"},
+        "blouson":{"min" : "8", "max" : "25"},
+        "trench":{"min" : "10", "max" : "62,50"},
+        "manteau":{"min" : "10", "max" : "62,50"},
+    },
+}
 
 /* ! BRANDS */

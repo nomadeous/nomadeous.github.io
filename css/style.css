@@ -193,8 +193,57 @@ footer a, footer a:hover, footer a:focus, footer .social-links li:hover a {
 .process-list li:hover .icon:after {
     box-shadow:inset 0 0 0 10px rgba(0,0,0,0.08);
 }
+/*---------------------
+----!Process Styles----
+----------------------*/
 
-/* RESPONSIVE */
+#whatwebuy ul {
+     margin:0;padding:0;
+}
+#whatwebuy dt, #whatwebuy dd {
+    padding-top : 20px;
+}
+
+/*---------------------
+----Brands Styles----
+----------------------*/
+.brand {text-transform: uppercase;}
+#brands-list-index {
+    text-align: center;
+}
+#brands-list .dl-horizontal dt {
+    width:40%;
+}
+#brands-list .dl-horizontal dd {
+    margin-left:45%;
+}
+#brands-list .dl-horizontal dt a {
+    font-size:10px;
+    margin-left : 5px;
+    vertical-align: middle;
+}
+
+/*---------------------
+----!Brands Styles----
+----------------------*/
+#howmany p {
+    vertical-align: center;
+}/*
+#faq .dl-horizontal dt {
+    width: 40%;
+    text-overflow: initial;
+    white-space: normal;
+    padding-top : 20px;
+}
+#faq .dl-horizontal dd {
+    margin-left:45%;
+    text-overflow: initial;
+    white-space: normal;
+    padding-top : 20px;
+}*/
+/*--------------------
+----RESPONSIVENESS ----
+----------------------*/
 @media (max-width: 1023px) {
     h1, h1 span{font-size:22px;line-height: 22px;}
     .nav li a {font-size : 14px;}
@@ -235,14 +284,17 @@ footer a, footer a:hover, footer a:focus, footer .social-links li:hover a {
         width:100%;
         margin-bottom: 20px;
     }
-    #whatwebuy ul {padding:0px;}
-    #whatwebuy ul ul {padding-left:35px;}
+    #whatwebuy dt, #whatwebuy dd {
+        padding-top : 10px;
+    }
 }
 @media (max-width: 319px){
     h1, h1 span{font-size:20px;line-height: 22px;}
     section.container h2 {line-height: 22px;}
 }
 
-/* ! RESPONSIVE */
+/*--------------------
+----!RESPONSIVENESS --
+----------------------*/
 
 

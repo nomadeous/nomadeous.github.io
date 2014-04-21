@@ -247,6 +247,7 @@ footer a, footer a:hover, footer a:focus, footer .social-links li:hover a {
 @media (max-width: 1023px) {
     h1, h1 span{font-size:22px;line-height: 22px;}
     .nav li a {font-size : 14px;}
+    .navbar-nav>li>a {font-size: 14px;padding:5px;}
 }
 @media (max-width: 767px) {
     body,p{
@@ -287,9 +288,16 @@ footer a, footer a:hover, footer a:focus, footer .social-links li:hover a {
     #whatwebuy dt, #whatwebuy dd {
         padding-top : 10px;
     }
+    h1.navbar-header{float:left;clear:right;}
+    h1.navbar-header a, h1.navbar-hear span {font-size:18px;}
+    .navbar-collapse {float:left;overflow-x: hidden;clear:left;}
+    .navbar-toggle {margin:0px;border-color: #E80C7A;border-radius:0;}
+    .navbar-toggle span {border-color: #E80C7A;background-color: #E80C7A}
+    /*margin:0px;padding:0px;clear:none;*/
 }
 @media (max-width: 319px){
     h1, h1 span{font-size:20px;line-height: 22px;}
+    h1.navbar-header{width:150px;font-size: 14px;float:left;}
     section.container h2 {line-height: 22px;}
 }
 

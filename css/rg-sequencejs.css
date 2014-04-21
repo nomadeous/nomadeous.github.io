@@ -31,7 +31,7 @@ Sequence.js and its dependencies are (c) Ian Lunn Design 2012 - 2013 unless othe
   margin: 0 auto;
   /*background: transparent;*/
     /*background-position: center;*/
-    background-image: url(../img/closet.jpg);
+    background-image: url(../img/closet-large.jpg);
     background-size: cover;
   opacity:1;
   /* Preloader */
@@ -316,6 +316,11 @@ Sequence.js and its dependencies are (c) Ian Lunn Design 2012 - 2013 unless othe
     #sequence #slide1 h2 {
         top : -150px;
     }
+    #sequence {
+        /*background-position: center;*/
+        background-image: url(../img/closet-medium.jpg);
+        background-size: cover;
+    }
 }
 
 @media (max-width: 767px){
@@ -344,6 +349,11 @@ Sequence.js and its dependencies are (c) Ian Lunn Design 2012 - 2013 unless othe
     #sequence .slide p {font-size: 18px;line-height:18px;}
     #sequence #slide2 * , #sequence #slide3 * {
         left:0px;right:0px;
+    }
+    #sequence {
+        /*background-position: center;*/
+        background-image: url(../img/closet-small.jpg);
+        background-size: cover;
     }
     
     #sequence #slide1, #sequence #slide2, #sequence #slide3 {

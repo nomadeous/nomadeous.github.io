@@ -209,7 +209,7 @@ var brandsRef = { brands : [
 {"id" : "APC","gamme":"T"},
 {"id" : "APOSTROPHE","gamme":"T"},
 {"id" : "APRIL MAY","gamme":"T"},
-{"id" : "Abercrombie & Fitch","gamme":"GP"},
+{"id" : "ABERCROMBIE & FITCH","gamme":"GP"},
 {"id" : "BALENCIAGA","gamme":"HG"},
 {"id" : "BALMAIN","gamme":"HG"},
 {"id" : "BANANA REPUBLIC","gamme":"GP"},

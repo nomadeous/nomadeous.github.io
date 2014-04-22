@@ -14,14 +14,12 @@
         <!-- Bootstrap 
         <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">-->
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        
-        <!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700|Raleway:300|Cabin:400" rel="stylesheet" type="text/css">-->
-        <!--link href="css/rg-fonts.css" rel="stylesheet" type="text/css"-->
+
         <link href='http://fonts.googleapis.com/css?family=Raleway:400,700,300' rel='stylesheet' type='text/css'>
         <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+        <link href="css/select2.css" rel="stylesheet" type="text/css" >
         <link href="css/rg-style.css" rel="stylesheet" type="text/css">
         <link href="css/rg-sequencejs.css" rel="stylesheet" type="text/css">
-        <link href="css/select2.css" rel="stylesheet" type="text/css" >
         
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -137,7 +135,7 @@
                 <p class="section-description">Voici la liste des marques que nous acceptons (pour l'instant, so <a href="#followus" class="scrollto">Stay Tuned !</a>) : </p>
                 <div id="brands-list-index" class="container">
                 </div>
-                <div id="brands-list">
+                <div id="brands-list" class="container">
                 </div>
             </section>
             <section id="howmany">
@@ -145,10 +143,19 @@
                 <p class="section-description">
                     Les prix d'achat varient selon la marque et le type de v&#234;tement. Vous toucherez 25% en cash du prix de revente (TTC) ou 40% en bon d'achat.
                 </p>
+                
+
+                <dl class="dl-horizontal">
+                    <dt>Pour</dt>
+                    <dd><input type="hidden" id="types-selection" style="width:300px" /></dd>
+                    <dt>de chez </dt>
+                    <dd><input type="hidden" id="brands-selection" style="width:300px" /></dd>
+                </dl>
+<!--
                 <p class="text-center">
                     Pour <input type="hidden" id="types-selection" style="width:300px" /> de chez 
                     <input type="hidden" id="brands-selection" style="width:300px" />
-                </p>
+                </p>-->
                 <p class="text-center">
                     Vous obtiendrez entre <span id="howmany-min">&euro;</span> et <span id="howmany-max">&euro;</span>.
                 </p>
@@ -168,11 +175,11 @@
             </dl>
         </section>
         
-        <footer class=" text-center">
+        <footer>
             <section id="mission" ><h2>Refashion Gallery</h2><p class="section-description">Favoriser une mani&#232;re de s'habiller avec qualit&#233; et plus responsable de l'environnement</p></section>
             <p id="contactus">Contactez-nous :
                 <ul class="list-inline" >
-                    <li><a href="mailto:contact@refashiongallery.com">Par e-mail : <i class="fa fa-envelope fa-fw"></i></a></li>
+                    <li><a href="mailto:contact@refashiongallery.com">Par e-mail <i class="fa fa-envelope fa-fw"></i></a></li>
                 </ul>
             </p>
             <p id="followus">

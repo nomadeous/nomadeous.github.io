@@ -25,7 +25,7 @@ h1 span { font-family: Raleway, Arial, sans-serif; font-size: 24px;text-transfor
 h1 a:hover, h1 a:focus {text-decoration: none;}
 
 
-#header { background-color : #fff; box-shadow: 0 0 3px rgba(0,0,0,0.3);z-index: 1000;}
+#header { background-color : #fff; box-shadow: 0 0 3px rgba(0,0,0,0.3);z-index: 10001;}
 header {padding:10px;
     background: none repeat scroll 0% 0% rgb(255, 255, 255); box-shadow: 0px 2px 2px rgb(230, 230, 230);
 }
@@ -52,6 +52,7 @@ a:hover,
 a:focus, #howmany-min, #howmany-max, #whatwebuy .fa {
   color:#E80C7A;
 }
+#howmany-min, #howmany-max {font-weight: bold;}
 
 .nav li a:hover, .nav li a:focus {
     background:transparent;
@@ -110,7 +111,7 @@ section.container h3:after {
 
 footer {
     /*background:#9C1759;*/
-    background: #E80C7A;
+    background: #E80C7A;text-align: center;
 }
 footer a, footer a:hover, footer a:focus, footer .social-links li:hover a {
     /*color: #9FEE00;*/
@@ -197,38 +198,56 @@ footer a, footer a:hover, footer a:focus, footer .social-links li:hover a {
 ----!Process Styles----
 ----------------------*/
 
+/*---------------------
+----Brands Styles----
+----------------------*/
 #whatwebuy ul {
      margin:0;padding:0;
 }
 #whatwebuy dt, #whatwebuy dd {
-    padding-top : 20px;
+    padding-bottom : 20px;
 }
-
-/*---------------------
-----Brands Styles----
-----------------------*/
-.brand {text-transform: uppercase;}
+/*.brand {text-transform: uppercase;}*/
 #brands-list-index {
     text-align: center;
+    margin-bottom: 10px;
+}
+#brands-list-index a {font-weight: 600;}
+#brands-list {
+    column-count:3;
+    -moz-column-count:3; /* Firefox */
+    -webkit-column-count:3; /* Safari and Chrome */
+    column-gap:40px;
+    -moz-column-gap:40px; /* Firefox */
+    -webkit-column-gap:40px; /* Safari and Chrome */
 }
 #brands-list .dl-horizontal dt {
-    width:40%;
+    width:30px;
 }
 #brands-list .dl-horizontal dd {
-    margin-left:45%;
+    margin-left:45px;
 }
 #brands-list .dl-horizontal dt a {
     font-size:10px;
     margin-left : 5px;
     vertical-align: middle;
 }
+/*
+.select2-search, #select2-drop-mask {z-index : 999;}*/
 
 /*---------------------
 ----!Brands Styles----
 ----------------------*/
 #howmany p {
     vertical-align: center;
-}/*
+}
+#howmany .dl-horizontal dt {
+    width:35%;
+}
+#howmany .dl-horizontal dd {
+    margin-left:40%;
+}
+/*
 #faq .dl-horizontal dt {
     width: 40%;
     text-overflow: initial;
@@ -248,6 +267,14 @@ footer a, footer a:hover, footer a:focus, footer .social-links li:hover a {
     h1, h1 span{font-size:22px;line-height: 22px;}
     .nav li a {font-size : 14px;}
     .navbar-nav>li>a {font-size: 14px;padding:5px;}
+    #brands-list {
+        column-count:2;
+        -moz-column-count:2; /* Firefox */
+        -webkit-column-count:2; /* Safari and Chrome */
+        column-gap:20px;
+        -moz-column-gap:20px; /* Firefox */
+        -webkit-column-gap:20px; /* Safari and Chrome */
+    }
 }
 @media (max-width: 767px) {
     body,p{
@@ -286,7 +313,10 @@ footer a, footer a:hover, footer a:focus, footer .social-links li:hover a {
         margin-bottom: 20px;
     }
     #whatwebuy dt, #whatwebuy dd {
-        padding-top : 10px;
+        padding-bottom : 10px;
+    }
+    #whatwebuy dd {
+        margin-left : 10px;
     }
     h1.navbar-header{float:left;clear:right;}
     h1.navbar-header a, h1.navbar-hear span {font-size:18px;}
@@ -294,6 +324,28 @@ footer a, footer a:hover, footer a:focus, footer .social-links li:hover a {
     .navbar-toggle {margin:0px;border-color: #E80C7A;border-radius:0;}
     .navbar-toggle span {border-color: #E80C7A;background-color: #E80C7A}
     /*margin:0px;padding:0px;clear:none;*/
+    #brands-list {
+        column-count:1;
+        -moz-column-count:1; /* Firefox */
+        -webkit-column-count:1; /* Safari and Chrome */
+        column-gap:10px;
+        -moz-column-gap:10px; /* Firefox */
+        -webkit-column-gap:10px; /* Safari and Chrome */
+    }
+    #brands-list .dl-horizontal dt {
+        width: 100%;text-align: center;
+    }
+    #brands-list .dl-horizontal dd {
+        margin-left: 18%;
+    }
+    #howmany .dl-horizontal dt {
+        width:100%;
+        text-align: center;
+    }
+    #howmany .dl-horizontal dd {
+        margin-left:0%;
+        text-align: center;
+    }
 }
 @media (max-width: 319px){
     h1, h1 span{font-size:20px;line-height: 22px;}

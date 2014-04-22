@@ -14,6 +14,7 @@ $doc.on('scroll', function() {
 })*/
 
 $(document).ready(function() {
+    //var hash = "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3";
     /*============================================
 	Sequence Slider
 	==============================================*/
@@ -80,7 +81,7 @@ $(document).ready(function() {
             prices = tarifsRef[brand.gamme][type];
             //$('#howmany-min').html(prices.min + ' &euro;');
             //$('#howmany-max').html(prices.max + ' &euro;');
-            scrollNumber(0, prices.min, $('#howmany-min'), function() {
+            scrollNumber(0, 0, $('#howmany-min'), function() {
                 scrollNumber(0, prices.min, $('#howmany-min'));
             });
             scrollNumber(0, 0, $('#howmany-max'), function() {

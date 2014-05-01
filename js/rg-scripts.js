@@ -203,6 +203,7 @@ var brandsRef = { brands : [
 {"id" : "7 FOR ALL MANKIND","gamme":"T"},
 {"id" : "ACNE","gamme":"HG"},
 {"id" : "AGNÈS B.","gamme":"T"},
+{"id" : "ALAIN FIGARET","gamme":"GP"},
 {"id" : "AMERICAN RETRO","gamme":"T"},
 {"id" : "AMERICAN VINTAGE","gamme":"T"},
 {"id" : "ANN DEMEULEMEESTER","gamme":"HG"},
@@ -236,6 +237,7 @@ var brandsRef = { brands : [
 {"id" : "CATHERINE MALANDRINO","gamme":"T"},
 {"id" : "CELINE","gamme":"HG"},
 {"id" : "CHANEL","gamme":"HG"},
+{"id" : "CHATTAWAK","gamme":"T"},
 {"id" : "CHEAP MONDAY","gamme":"GP"},
 {"id" : "CHLOÉ","gamme":"HG"},
 {"id" : "CHRISTINE PHUNG","gamme":"HG"},
@@ -389,7 +391,8 @@ var brandsRef = { brands : [
 {"id" : "YOHJI YAMAMOTO","gamme":"HG"},
 {"id" : "YVES SAINT LAURENT","gamme":"HG"},
 {"id" : "ZADIG & VOLTAIRE","gamme":"T"},
-{"id" : "ZARA  - hors ZARA basic","gamme":"GP"}]};
+/*{"id" : "ZARA  - hors ZARA basic","gamme":"GP"}*/
+]};
 
 var tarifsRef = { "GP" :
     {

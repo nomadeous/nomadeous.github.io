@@ -199,8 +199,6 @@ var typesRef = { types : [
 
 
 var brandsRef = { brands : [
-{"id" : "3.1 PHILLIP LIM","gamme":"T"},
-{"id" : "7 FOR ALL MANKIND","gamme":"T"},
 {"id" : "ACNE","gamme":"HG"},
 {"id" : "AGNÈS B.","gamme":"T"},
 {"id" : "ALAIN FIGARET","gamme":"GP"},
@@ -268,6 +266,7 @@ var brandsRef = { brands : [
 {"id" : "ERIC BOMPARD","gamme":"T"},
 {"id" : "EROTOKRITOS","gamme":"T"},
 {"id" : "ESCADA","gamme":"HG"},
+{"id" : "ESSENTIEL","gamme":"T"},
 {"id" : "ET VOUS","gamme":"GP"},
 {"id" : "ETRO","gamme":"HG"},
 {"id" : "FRENCH CONNECTION","gamme":"GP"},
@@ -392,6 +391,8 @@ var brandsRef = { brands : [
 {"id" : "YVES SAINT LAURENT","gamme":"HG"},
 {"id" : "ZADIG & VOLTAIRE","gamme":"T"},
 /*{"id" : "ZARA  - hors ZARA basic","gamme":"GP"}*/
+{"id" : "3.1 PHILLIP LIM","gamme":"T"},
+{"id" : "7 FOR ALL MANKIND","gamme":"T"},
 ]};
 
 var tarifsRef = { "GP" :
